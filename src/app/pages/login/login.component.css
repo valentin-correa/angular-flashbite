@@ -1,11 +1,11 @@
 #login-container{
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, black, #364195);
 }
 
 .card {
-  height: 60vh;
+  height: 55vh;
   width: 100%;
   max-width: 400px;
 }
@@ -17,4 +17,9 @@ label, h2, button, a {
 
 button, a{
   color: white;
+}
+
+.btn-primary{
+    background-color: #333e8f;
+    border-color: #333e8f;
 }
