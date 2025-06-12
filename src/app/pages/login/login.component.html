@@ -1,17 +1,17 @@
-<div class="container" id="login-container">
-  <div class="container-fluid d-flex justify-content-start align-items-center vh-100">
+<div class="container-fluid" id="login-container">
+  <div class="container d-flex justify-content-start align-items-center vh-100">
     <div class="card shadow p-4">
-      <h2 class="text-center mb-4">Login</h2>
+      <h2 class="text-center mt-2 mb-4">Login</h2>
       <form>
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" placeholder="user@example.com" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" placeholder="••••••••" required>
         </div>
-        <div class="d-flex justify-content-between gap-3 mt-4">
+        <div class="d-flex justify-content-between gap-3 mt-5">
         <a [routerLink]="'/register'" class="btn btn-secondary w-50">I don't have an account</a>
         <button type="submit" class="btn btn-primary w-50">Login</button>   
         </div>
