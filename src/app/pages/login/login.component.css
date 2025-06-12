@@ -1,7 +1,6 @@
 #login-container{
-  height: 100vh;
-  margin: 0;
   background: linear-gradient(135deg, black, #364195);
+  min-height: 100vh;
 }
 
 .card {
@@ -15,6 +14,16 @@ label, h2, button, a {
   color: #545454
 }
 
+input {
+  background-color: #f7f6f7;
+  border-color: #929292;
+}
+
 button, a{
   color: white;
+}
+
+.btn-primary {
+  background-color: #333e8f;
+  border-color: #333e8f;
 }
