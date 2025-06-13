@@ -35,7 +35,7 @@
 }
 
 ::placeholder {
-    color: white;
+    color: #d8d8d8
 }
 
 .current-page {
@@ -50,4 +50,35 @@
     border-color: #545454;
     border-width: 2px;
     color: black;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.input-search {
+    width: 10rem;
+    text-align: left;
+    padding-left: 3rem;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+}
+
+.search-icon, .quantity-icon {
+  position: absolute;
+  left: 12px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  -webkit-filter: hue-rotate(180deg);
+  filter: hue-rotate(180deg)
+}
+
+.quantity-icon {
+    width: 30px;
+    height: 25px;
 }
