@@ -21,3 +21,7 @@ button, a {
     background-color: #333e8f;
     border-color: #333e8f;
 }
+
+.btn-primary:hover{
+    background-color: #1b227d;
+}

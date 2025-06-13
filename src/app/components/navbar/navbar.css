@@ -30,3 +30,7 @@
   display: inline-block;
   z-index: 1;
 }
+
+.nav-link:hover{
+  background-color: #1b227d;
+}
