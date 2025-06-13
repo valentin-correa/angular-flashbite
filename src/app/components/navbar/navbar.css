@@ -30,3 +30,7 @@
   display: inline-block;
   z-index: 1;
 }
+
+.margen-derecho{
+    margin-right: 30px;
+}
