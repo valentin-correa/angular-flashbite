@@ -3,6 +3,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TemplateComponent } from './pages/template/template.component';
+import { Zones } from './pages/zones/zones';
+import { Delivery } from './pages/delivery/delivery';
 
 export const routes: Routes = [
   {
@@ -13,6 +15,14 @@ export const routes: Routes = [
         path: '',
         component: HomeComponent,
       },
+      {
+        path: 'zones',
+        component: Zones
+      },
+        {
+        path: 'deliveries',
+        component: Delivery
+      }
     ],
   },
   { path: 'login', component: LoginComponent },
