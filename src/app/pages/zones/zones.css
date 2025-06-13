@@ -1,0 +1,28 @@
+* {
+    font-family: 'Montserrat';
+}
+
+.btn-primary {
+    color:white;
+    font-weight: bold;
+}
+
+.circular-btn {
+    border-color: black;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 24px;
+    font-size: x-small;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination {
+    gap: 42px;
+}
+
+.rounded-pill {
+    font-size: small;
+}
