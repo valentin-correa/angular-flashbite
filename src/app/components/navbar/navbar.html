@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-sm fixed-top">
+  <div class="container-fluid" id="navbar-container">
+    <a class="navbar-brand" routerLink="/"> <img src="assets/logo.ico" alt="Logo" width="42" height="42"> </a>
+
+      <button
+        class="navbar-toggler"
+      type="button"
+      (click)="toggleNavbar()"
+      aria-controls="navbarNav"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-label="Toggle navigation"
+      >
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [class.collapse]="isCollapsed" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex ms-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/deliveries" routerLinkActive="active">Deliveries</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/zones" routerLinkActive="active">Zones</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

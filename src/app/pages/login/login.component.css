@@ -1,10 +1,9 @@
 #login-container{
-  background: linear-gradient(135deg, black, #364195);
   min-height: 100vh;
+  background: linear-gradient(135deg, black, #364195);
 }
 
 .card {
-  height: 60vh;
   width: 100%;
   max-width: 400px;
 }
@@ -12,6 +11,11 @@
 label, h2, button, a {
   font-weight: bold;
   color: #545454
+}
+ 
+input {
+    background-color: #f7f6f7;
+    border-color: #929292;
 }
 
 input {
@@ -23,7 +27,18 @@ button, a{
   color: white;
 }
 
+<<<<<<< HEAD
 .btn-primary {
   background-color: #333e8f;
   border-color: #333e8f;
+=======
+.btn-primary{
+    background-color: #333e8f;
+    border-color: #333e8f;
+}
+
+input {
+    background-color: #f7f6f7;
+    border-color: #929292;
+>>>>>>> 3941a2ff1551a252daee236fa30f05d724e5df24
 }
