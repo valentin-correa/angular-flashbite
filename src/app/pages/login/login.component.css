@@ -18,6 +18,11 @@ input {
     border-color: #929292;
 }
 
+input {
+  background-color: #f7f6f7;
+  border-color: #929292;
+}
+
 button, a{
   color: white;
 }

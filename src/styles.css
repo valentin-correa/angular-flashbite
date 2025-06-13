@@ -2,3 +2,9 @@
 body {
     font-family: 'Montserrat';
 }
+
+.btn-primary {
+    background-color: #333e8f;
+    color: white;
+    border-color: #333e8f;
+}

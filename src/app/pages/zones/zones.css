@@ -1,0 +1,46 @@
+* {
+    font-family: 'Montserrat';
+}
+
+.btn-primary {
+    font-weight: bold;
+}
+
+.circular-btn {
+    border-color: black;
+    border-radius: 50%;
+    border-width: 1px;
+    aspect-ratio: 1/1;
+    height: 24px;
+    font-size: x-small;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    
+}
+
+.circular-btn:hover {
+    background-color: #1e2a8f;
+    color: white;
+}
+
+.pagination {
+    gap: 42px;
+}
+
+.rounded-pill {
+    font-size: small;
+}
+
+::placeholder {
+    color: white;
+}
+
+.current-page {
+    background-color: #1e2a8f;
+    color: white;
+    cursor: default;
+    border: none;
+    font-weight: bold;
+}
