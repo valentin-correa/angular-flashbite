@@ -5,7 +5,7 @@
     <input class="form-control-sm btn-primary" type="text" placeholder="How Many?">
 </div>
 
- <table class="table table-bordered mt-2">
+<table class="table table-bordered mt-2">
   <thead>
     <tr class="table-primary">
       <th scope="col">ID</th>
@@ -13,18 +13,21 @@
       <th scope="col">Location</th>
       <th scope="col">Radius</th>
       <th scope="col">Deliveries</th>
-      <th scope="col"></th>
+      <th scope="col">
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
+    <tr *ngFor="let zone of zones">
+      <th scope="row">{{ zone.id }}</th>
+      <td>{{ zone.name }}</td>
+      <td>{{ zone.location }}</td>
+      <td>{{ zone.radius }}</td>
+      <td>{{ zone.deliveries }}</td>
+      <td d-flex gap-3>
+        <button class="btn btn-sm btn-warning">Update</button>
+        <button class="btn btn-sm btn-danger">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
