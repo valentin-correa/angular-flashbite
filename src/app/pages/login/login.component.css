@@ -32,6 +32,11 @@ button, a{
     border-color: #333e8f;
 }
 
+.btn-primary:hover{
+      background-color: #1b227d;
+
+}
+
 input {
     background-color: #f7f6f7;
     border-color: #929292;
