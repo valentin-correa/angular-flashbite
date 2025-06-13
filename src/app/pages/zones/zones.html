@@ -1,8 +1,8 @@
 <div class="container mt-5">
 <div class="container-fluid d-flex p-0 gap-4">
     <h2 class="fw-bold">Zones</h2>
-    <input class="form-control-sm btn-primary" type="text" autofocus placeholder="Search by ID">
-    <input class="form-control-sm btn-primary" type="text" placeholder="How Many?">
+    <input class="rounded-pill form-control-sm btn-primary" type="text" autofocus placeholder="Search by ID">
+    <input type="text" class="rounded-pill form-control-sm btn-primary" placeholder="How Many?">
 </div>
 
 <table class="table table-bordered mt-2">
@@ -25,8 +25,8 @@
       <td>{{ zone.radius }}</td>
       <td>{{ zone.deliveries }}</td>
       <td class= "d-flex gap-3 justify-content-center">
-        <button class="rounded-pill btn btn-warning px-5 me-2">Update</button>
-        <button class="rounded-pill btn btn-danger px-5">Delete</button>
+        <button class="rounded-pill btn btn-warning w-100">Update</button>
+        <button class="rounded-pill btn btn-danger w-100">Delete</button>
       </td>
     </tr>
   </tbody>

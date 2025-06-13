@@ -31,6 +31,7 @@
 
 .rounded-pill {
     font-size: small;
+    font-weight: bold;
 }
 
 ::placeholder {
@@ -43,4 +44,10 @@
     cursor: default;
     border: none;
     font-weight: bold;
+}
+
+.btn-danger, .btn-warning {
+    border-color: #545454;
+    border-width: 2px;
+    color: black;
 }
