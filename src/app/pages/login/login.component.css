@@ -27,11 +27,6 @@ button, a{
   color: white;
 }
 
-<<<<<<< HEAD
-.btn-primary {
-  background-color: #333e8f;
-  border-color: #333e8f;
-=======
 .btn-primary{
     background-color: #333e8f;
     border-color: #333e8f;
@@ -40,5 +35,4 @@ button, a{
 input {
     background-color: #f7f6f7;
     border-color: #929292;
->>>>>>> 3941a2ff1551a252daee236fa30f05d724e5df24
 }
