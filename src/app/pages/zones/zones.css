@@ -82,3 +82,7 @@
     width: 30px;
     height: 25px;
 }
+
+.dropend, #deliveries {
+    width:  1%;
+}
