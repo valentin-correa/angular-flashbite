@@ -1,0 +1,20 @@
+.fondo-azul{
+    background-color:#333e8f;;
+    border-color: #333e8f;
+}
+.hover-dark:hover {
+  filter: brightness(0.7);
+  transition: filter 0.2s; /* Efecto suave */
+}
+.form-label {
+  font-size: smaller;
+}
+button[type="submit"] {
+  font-size:smaller;
+}
+.form-control{
+    height: 9vh;
+}
+.modal-dialog.modal-lg {
+  max-width: 700px; /* Sobrescribe el ancho de modal-lg */
+}
