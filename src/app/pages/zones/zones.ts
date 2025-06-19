@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
+import { CreateZone } from "./create-zone/create-zone";
 
 @Component({
   selector: 'app-zones',
-  imports: [],
+  imports: [CreateZone,CommonModule],
   templateUrl: './zones.html',
   styleUrl: './zones.css'
 })
 export class Zones implements OnInit {
   zones: Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[]}> = [];
-
+  
+  //variables para controlar la aparición de modals
+  mostrarCreateZone=false;
   constructor(private zoneService: ZoneService, private globalStatusService: GlobalStatusService) {}
 
   ngOnInit(): void {
@@ -20,8 +23,11 @@ export class Zones implements OnInit {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
+    
     const data = await this.zoneService.getZones();
     this.zones = data;
     this.globalStatusService.setLoading(false);
   }
+  
+  
 }

@@ -1,0 +1,14 @@
+.fondo-azul{
+    background-color:#333e8f;;
+    border-color: #333e8f;
+}
+.hover-dark:hover {
+  filter: brightness(0.7);
+  transition: filter 0.2s; /* Efecto suave */
+}
+.form-label {
+  font-size: smaller;
+}
+button[type="submit"] {
+  font-size:x-small;
+}
