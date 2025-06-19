@@ -23,7 +23,6 @@ export class Zones implements OnInit {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
-    
     const data = await this.zoneService.getZones();
     this.zones = data;
     this.globalStatusService.setLoading(false);
