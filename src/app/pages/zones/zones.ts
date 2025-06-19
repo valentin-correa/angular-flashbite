@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
-import { CreateZone } from "./create-zone/create-zone";
+import { CreateZone } from '../../components/create-zone/create-zone';
+
 
 @Component({
   selector: 'app-zones',
