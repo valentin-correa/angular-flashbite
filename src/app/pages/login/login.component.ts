@@ -22,7 +22,7 @@ export class LoginComponent {
 	  });
   }
 
-  async loguear() {
+  async login() {
 	  if (this.formulario.invalid) {
 	    this.error = 'Completa todos los campos correctamente.';
 	    return;
