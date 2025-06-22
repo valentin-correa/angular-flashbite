@@ -21,4 +21,25 @@ export class ZoneService {
 
     return response.data
   }
+  async createZone(zone:{name:string,radius:number,location:{lat:number,lng:number}}):Promise<string>{
+    const token = localStorage.getItem('token');
+    try {
+    await axios.post(
+      config.urls.getZones,       
+      zone,
+      {headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }}
+    );
+    return "ok"; // si no hubo error, devuelve true
+  } catch (error:any) {
+    const message =
+      error.response?.data?.message ||  // si existe un mensaje de error que manda el backend lo uso
+      error.message ||                  // mensaje generado por Axios
+      "Unknown Error";                  // por si no se obtiene
+    return message;
+  }
+  }
+  
 }
