@@ -38,7 +38,7 @@ export class LoginComponent {
       
       this.error = ''
 
-      localStorage.setItem('access_token', response.data.token)
+      localStorage.setItem('access_token', response.data.accessToken)
       this.router.navigate(['zones'])
 
     }

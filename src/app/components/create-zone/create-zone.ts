@@ -47,11 +47,11 @@ export class CreateZone {
       const data = {
         //las siguientes validaciones sirven para ocntrarrestrar manipulaciones del html en el navegador
         name: (form.nombre ?? '').trim(),  // asegura que no sea null y remueve espacios
-        radius: Number(form.radio),        // convierte a number para garantizar
         location: {
           lat: Number(form.latitud),
           lng: Number(form.longitud)
-        }
+        },
+        radius: Number(form.radio),        // convierte a number para garantizar
       };
       this.createNewZone(data);
       this.error = '';
@@ -59,7 +59,7 @@ export class CreateZone {
       }
     });
   }
-  async createNewZone(data:{name:string,radius:number,location:{lat:number,lng:number}}){
+  async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
     const response=await this.zoneService.createZone(data);
     if (response=='ok'){
       Swal.fire({
