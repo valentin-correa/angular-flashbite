@@ -11,7 +11,7 @@ export const routes: Routes = [
   {
     path: '',
     component: TemplateComponent,
-    //canActivate: [canActivateFn],
+    canActivate: [canActivateFn],
     children: [
       {
         path: '',
