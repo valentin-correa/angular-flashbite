@@ -29,5 +29,11 @@ export class Zones implements OnInit {
     this.globalStatusService.setLoading(false);
   }
   
-  
+  agregarZona(zone: any): void { 
+    const zoneWithoutDeliveries = {...zone, deliveries: []}
+
+    this.zones = [...this.zones, zoneWithoutDeliveries]
+    console.log(this.zones)
+  }
+
 }

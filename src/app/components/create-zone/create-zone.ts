@@ -14,6 +14,7 @@ import { ZoneService } from '../../services/zone.service';
 export class CreateZone {
 
   @Output() cerrar = new EventEmitter<void>();
+  @Output() crearZona = new EventEmitter<any>();
 
   onCerrar() {
     this.cerrar.emit(); // Notifica al padre que se debe cerrar
@@ -28,7 +29,7 @@ export class CreateZone {
       longitud: [null, [Validators.required, Validators.min(-180), Validators.max(180)]]
     });
   }
-  send() {
+  async send() {
     if (this.formulario.invalid) {
       this.error = 'Completa todos los campos correctamente.';
       return;
@@ -41,7 +42,7 @@ export class CreateZone {
       confirmButtonColor:'#333e8f',
       denyButtonText: 'No, go back',
       
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const form = this.formulario.value;
       const data = {
@@ -53,24 +54,33 @@ export class CreateZone {
         },
         radius: Number(form.radio),        // convierte a number para garantizar
       };
-      this.createNewZone(data);
-      this.error = '';
-      this.onCerrar();
+      const result = await this.createNewZone(data);
+
+      if (result?.success) {
+        this.crearZona.emit(result.data)
+        this.error = '';
+        this.onCerrar();
       }
-    });
-  }
-  async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
-    const response=await this.zoneService.createZone(data);
-    if (response=='ok'){
-      Swal.fire({
+    }
+  });
+}
+async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+  const response=await this.zoneService.createZone(data);
+  if (response.success){
+    Swal.fire({
       title: '¡Zone created!',
       icon:'success',      
     })
+    
+    return {success: true, data: response.data}
+
     }else{
       Swal.fire({
       title: `There's been a problem creating zone.\n ${response}`,
       icon:'error',      
     })
+
+    return { success:true }
     }
 
   }

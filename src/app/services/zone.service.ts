@@ -18,19 +18,27 @@ export class ZoneService {
 
     return response.data
   }
-  async createZone(zone:{name:string,location:{lat:number,lng:number},radius:number}):Promise<string>{
+  async createZone(zone:{name:string,location:{lat:number,lng:number},radius:number}):Promise<{
+    success: true; data: any} | {success: false; error: string}
+  >{
     try {
-      await axiosService.post(
+      const response =  await axiosService.post(
         config.urls.getZones,       
         zone
       );
-      return "ok"; // si no hubo error, devuelve true
+
+      if (response.status===201) {
+        return { success: true, data: response.data}
+      } else {
+        return { success: false, error: `Unexpected response code: ${response.status}`}
+      }
+
     } catch (error:any) {
     const message =
       error.response?.data?.message ||  // si existe un mensaje de error que manda el backend lo uso
       error.message ||                  // mensaje generado por Axios
       "Unknown Error";                  // por si no se obtiene
-    return message;
+    return { success: false, error: message };
   }
   }
   
