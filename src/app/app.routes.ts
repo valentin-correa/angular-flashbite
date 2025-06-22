@@ -5,11 +5,13 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TemplateComponent } from './pages/template/template.component';
 import { Zones } from './pages/zones/zones';
 import { Delivery } from './pages/delivery/delivery';
+import { canActivateFn } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: TemplateComponent,
+    //canActivate: [canActivateFn],
     children: [
       {
         path: '',

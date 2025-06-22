@@ -4,32 +4,53 @@
       <div class="col-md-6">
         <div class="card shadow p-4 w-100" style="max-width: 400px;">
           <h2 class="text-center mb-4">Register</h2>
-          <form>
+          @if (successMessage) {
+            <div class="alert alert-success">{{ successMessage }}</div>
+          }
+          <form [formGroup]="formulario" (ngSubmit)="register()">
+            @if (error) {
+              <div class="alert alert-danger">{{ error }}</div>
+            }
             <div class="d-flex justify-content-between gap-3">
               <div class="mb-3 w-100">
                 <label for="first-name" class="form-label">First name</label>
-                <input type="text" class="form-control" id="first-name" required>
+                <input formControlName="firstName" type="text" class="form-control" id="first-name" required>
+                @if (formulario.get('firstName')?.invalid && formulario.get('firstName')?.touched) {
+                  <p class="text-danger">First name is invalid</p>
+                }
               </div>
               <div class="mb-3 w-100">
                 <label for="last-name" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="last-name" required>
+                <input formControlName="lastName" type="text" class="form-control" id="last-name" required>
+                @if (formulario.get('lastName')?.invalid && formulario.get('lastName')?.touched) {
+                  <p class="text-danger">Last name is invalid</p>
+                }
               </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" required>
+              <input formControlName="email" type="email" class="form-control" id="email" required>
+              @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
+                <p class="text-danger">Email is invalid</p>
+              }
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" required>
+              <input formControlName="password" type="password" class="form-control" id="password" required>
+              @if (formulario.get('password')?.invalid && formulario.get('password')?.touched) {
+                <p class="text-danger">No password entered</p>
+              }
             </div>
             <div class="mb-3">
               <label for="password-confirm" class="form-label">Confirm password</label>
-              <input type="password" class="form-control" id="password-confirm" required>
+              <input formControlName="passwordValidation" type="password" class="form-control" id="password-confirm" required>
+              @if (submitted && formulario.value.passwordValidation !== formulario.value.password) {
+                <p class="text-danger">Passwords don't match</p>
+              }
             </div>
             <div class="d-flex justify-content-between gap-3 mt-5">
               <a [routerLink]="'/login'" class="btn btn-secondary w-100">I have an account</a>
-              <button type="submit" class="btn btn-primary w-100">Register</button>
+              <button type="submit" [disabled]="formulario.invalid" class="btn btn-primary w-100">Register</button>
             </div>
           </form>
         </div>
