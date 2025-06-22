@@ -38,7 +38,7 @@ export class RegisterComponent {
     }
 
     try {
-      const response = await axiosService.post('https://localhost:3001/register', {
+      const response = await axiosService.post('http://localhost:3001/register', {
         email,
         password
       });
