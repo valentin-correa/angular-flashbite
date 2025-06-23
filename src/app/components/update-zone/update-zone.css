@@ -1,6 +1,6 @@
-.fondo-amarrillo{
-    background-color:#f9bf18;
-    border-color: #f9bf18;
+.fondo-amarillo{
+  background-color:#f9bf18;
+  border-color: #f9bf18;
 }
 .hover-dark:hover {
   filter: brightness(0.7);
@@ -17,4 +17,8 @@ button[type="submit"] {
 }
 .modal-dialog.modal-lg {
   max-width: 700px; /* Sobrescribe el ancho de modal-lg */
+}
+.fondo-id{
+  background-color:#f9d56c;
+  border-color:#f9d56c;
 }

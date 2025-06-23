@@ -1,5 +1,5 @@
 <div class="modal-backdrop fade show"></div>
-<div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="zoneCreationModal"
+<div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="zoneUpdateModal"
     style="display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 1050;">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content rounded-5">
@@ -16,7 +16,7 @@
                     <!-- position-relative: permite que los elementos hijos con position-absolute se posicionen respecto a este contenedor.
                      w-100 para usar todo el ancho disponible del contenedor.-->
                     <div class="position-absolute top-50 translate-middle-y end-0 me-4">
-                        <div class="bg-warning text-white rounded-pill px-3 py-1 d-flex align-items-center gap-2 small">
+                        <div class="fondo-id text-white rounded-pill px-3 py-1 d-flex align-items-center gap-2 small">
                         <span class="fw-bold">ID</span>
                         <span class="bg-white text-dark rounded-pill px-2 py-0 fw-bold">{{ zona.id }}</span>
                         </div>
@@ -37,8 +37,7 @@
                             <input type="text" class="form-control py-2 rounded-3 border-dark " formControlName="nombre" id="nameInput" aria-describedby="name"
                                 placeholder="Ej:Zona Norte">
                             @if (formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched) {
-                                <p class="text-danger">Name is required and must be have at least three characters.</p>
-                                }
+                                <p class="text-danger">Name is required and must be have at least three characters.</p>}
                         </div>
                         <div class="col-4">
                             <label for="radiusInput" class="form-label fw-bold" >Radius</label>
