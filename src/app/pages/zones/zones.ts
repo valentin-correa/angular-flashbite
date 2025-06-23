@@ -3,11 +3,8 @@ import { CommonModule, NgFor } from '@angular/common';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
 import { CreateZone } from '../../components/create-zone/create-zone';
-<<<<<<< HEAD
 import Swal from 'sweetalert2';
-=======
 import { UpdateZone } from "../../components/update-zone/update-zone";
->>>>>>> 9a02d309ff5c0d90c50c5609451665f1b722385e
 
 
 @Component({
