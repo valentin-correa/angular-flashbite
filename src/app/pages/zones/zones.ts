@@ -3,6 +3,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
 import { CreateZone } from '../../components/create-zone/create-zone';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -22,6 +23,29 @@ export class Zones implements OnInit {
       this.initialization()
   }
 
+  async confirmarEliminarZona(zona: any) {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: `Do you want to delete zone "${zona.name}" (ID: ${zona.id})?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#d33'
+  });
+
+  if (result.isConfirmed) {
+    const response = await this.zoneService.deleteZone(zona.id);
+
+    if (response.success) {
+      Swal.fire('Deleted!', 'Zone has been deleted.', 'success');
+      this.zones = this.zones.filter(z => z.id !== zona.id);
+    } else {
+      Swal.fire('Error', `There was a problem deleting the zone:\n${response.error}`, 'error');
+    }
+  }
+}
+
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
     const data = await this.zoneService.getZones();
@@ -35,5 +59,4 @@ export class Zones implements OnInit {
     this.zones = [...this.zones, zoneWithoutDeliveries]
     console.log(this.zones)
   }
-
 }
