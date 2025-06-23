@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
-
 @Component({
-  selector: 'create-zone-modal',
+  selector: 'update-zone-modal',
   imports: [CommonModule,ReactiveFormsModule],
-  templateUrl: './create-zone.html',
-  styleUrl: './create-zone.css'
+  templateUrl: './update-zone.html',
+  styleUrl: './update-zone.css'
 })
-export class CreateZone {
-
+export class UpdateZone {
   @Output() cerrar = new EventEmitter<void>();
-  @Output() crearZona = new EventEmitter<any>();
+  @Input() zona!: any;
+  @Output() zonaActualizada = new EventEmitter<any>();
 
   onCerrar() {
     this.cerrar.emit(); // Notifica al padre que se debe cerrar
@@ -39,7 +37,7 @@ export class CreateZone {
       title: '¿Are you sure?',
       icon:'question',
       showDenyButton: true,
-      confirmButtonText: '¡Yes, add zone!',
+      confirmButtonText: '¡Yes, update zone!',
       confirmButtonColor:'#333e8f',
       denyButtonText: 'No, go back',
       
@@ -55,23 +53,22 @@ export class CreateZone {
         },
         radius: Number(form.radio),        // convierte a number para garantizar
       };
-      const result = await this.createNewZone(data);
-
+      const result = await this.updateZone(data);
       if (result?.success) {
-        this.crearZona.emit(result.data)
+        this.zonaActualizada.emit(result.data)
         this.error = '';
         this.onCerrar();
       }
     }
   });
 }
-async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+async updateZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
   this.globalStatusService.setLoading(true);
-  const response=await this.zoneService.createZone(data);
+  const response=await this.zoneService.updateZone(data,this.zona.id);
   this.globalStatusService.setLoading(false);
   if (response.success){
     Swal.fire({
-      title: '¡Zone created!',
+      title: '¡Zone updated!',
       icon:'success',      
     })
     
@@ -79,7 +76,7 @@ async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:nu
 
     }else{
       Swal.fire({
-      title: `There's been a problem creating zone.\n ${response.error}`,
+      title: `There's been a problem updating the zone.\n ${response.error}`,
       icon:'error',      
     })
 
@@ -87,4 +84,18 @@ async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:nu
     }
 
   }
+  ngOnInit() {
+    //precargo el formulario con los actuales datos del evento
+    if (this.zona) {
+      this.formulario.patchValue({
+        nombre: this.zona.name,
+        radio: this.zona.radius,
+        latitud: this.zona.location.lat,
+        longitud: this.zona.location.lng
+      });
+    }
 }
+}
+
+
+
