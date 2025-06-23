@@ -42,8 +42,8 @@ export class CreateZone {
       confirmButtonColor:'#333e8f',
       denyButtonText: 'No, go back',
       
-    }).then(async (result) => {
-      if (result.isConfirmed) {
+    }).then(async (swalResult) => {
+      if (swalResult.isConfirmed) {
         const form = this.formulario.value;
       const data = {
         //las siguientes validaciones sirven para ocntrarrestrar manipulaciones del html en el navegador
@@ -76,11 +76,11 @@ async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:nu
 
     }else{
       Swal.fire({
-      title: `There's been a problem creating zone.\n ${response}`,
+      title: `There's been a problem creating zone.\n ${response.error}`,
       icon:'error',      
     })
 
-    return { success:true }
+    return { success:false }
     }
 
   }
