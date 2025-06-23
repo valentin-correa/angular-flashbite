@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ZoneService } from '../../services/zone.service';
+import { GlobalStatusService } from '../../services/global-status.service';
 
 @Component({
   selector: 'create-zone-modal',
@@ -21,7 +22,7 @@ export class CreateZone {
   }
   formulario: FormGroup;
   error = '';
-  constructor(private zoneService: ZoneService, private fb: FormBuilder) {
+  constructor(private zoneService: ZoneService, private fb: FormBuilder,private globalStatusService: GlobalStatusService) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       radio: [null, [Validators.required, Validators.min(0)]],
@@ -65,7 +66,9 @@ export class CreateZone {
   });
 }
 async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+  this.globalStatusService.setLoading(true);
   const response=await this.zoneService.createZone(data);
+  this.globalStatusService.setLoading(false);
   if (response.success){
     Swal.fire({
       title: '¡Zone created!',

@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ZoneService } from '../../services/zone.service';
+import { GlobalStatusService } from '../../services/global-status.service';
 @Component({
   selector: 'update-zone-modal',
   imports: [CommonModule,ReactiveFormsModule],
@@ -19,7 +20,7 @@ export class UpdateZone {
   }
   formulario: FormGroup;
   error = '';
-  constructor(private zoneService: ZoneService, private fb: FormBuilder) {
+  constructor(private zoneService: ZoneService, private fb: FormBuilder,private globalStatusService: GlobalStatusService) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       radio: [null, [Validators.required, Validators.min(0)]],
@@ -62,7 +63,9 @@ export class UpdateZone {
   });
 }
 async updateZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+  this.globalStatusService.setLoading(true);
   const response=await this.zoneService.updateZone(data,this.zona.id);
+  this.globalStatusService.setLoading(false);
   if (response.success){
     Swal.fire({
       title: '¡Zone updated!',
