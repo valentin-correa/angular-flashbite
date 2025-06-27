@@ -11,13 +11,18 @@ export class ZoneService {
 
   async getZones(): Promise<Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }>> {
     
-   // const token = localStorage.getItem('token');
-
     const response = await axiosService.get(config.urls.getZones, {
     });
 
     return response.data
   }
+
+  async getZoneByID(zoneID: string): Promise<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }> {
+    const response = await axiosService.get(config.urls.getZones + `/${zoneID}`);
+
+    return response.data
+  }
+
   async createZone(zone:{name:string,location:{lat:number,lng:number},radius:number}):Promise<{
     success: true; data: any} | {success: false; error: string}
   >{

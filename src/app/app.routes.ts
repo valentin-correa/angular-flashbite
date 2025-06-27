@@ -21,6 +21,11 @@ export const routes: Routes = [
         path: 'zones',
         component: Zones
       },
+      {
+        path: 'zones/:id',
+        component: Zones,
+        runGuardsAndResolvers: 'paramsChange'
+      },
         {
         path: 'deliveries',
         component: Delivery
