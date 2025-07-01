@@ -76,11 +76,15 @@ export class Zones implements OnInit, OnDestroy {
   } else {
     try {
       const cantidad = this.quantity ?? 10; //le doy valor por defecto 10 y me aseguro de que sea un número y no null
-      const zonasObtenidas = await this.zoneService.getZones(this.page, cantidad + 1);
-      //pedimos quantity + 1 para detectar si hay una zona extra en la siguiente página
+      this.zones = await this.zoneService.getZones(this.page, cantidad);
+      
+      //Lo siguiente puede hacer que si en la siguiente página hay 0 elementos me habilite ir y no debería
+      if (this.zones.length<cantidad){
+        this.hayMasZonas=false
+      }else{
+        this.hayMasZonas=true
+      }
 
-      this.hayMasZonas = zonasObtenidas.length > cantidad; //si trajo 1 de más habilitamos el botón de siguiente
-      this.zones = this.hayMasZonas ? zonasObtenidas.slice(0, cantidad) : zonasObtenidas; //si trajo de más truncamos, sino lo guardamos como esta
     } catch (error) {
       this.zones = [];
       console.error('Error al obtener zonas:', error);
@@ -145,12 +149,11 @@ export class Zones implements OnInit, OnDestroy {
     this.mostrarUpdateZone = false; //cierra el modal de updateZone
   }
 
-aplicarCantidad() {
+async aplicarCantidad() {
   const cantidad = this.quantity;
   if (typeof cantidad === 'number' && cantidad > 0) { //valida que no sea Null, NAN ni 0
     this.page = 1;//reseteo a 1 para asegurar que tendremos un resultado valido (la nueva combinación de page y quantity podría devolver algo vacío)
-    
-    this.buscarZonas(null);
+    await this.buscarZonas(null);
   }
 }
 
