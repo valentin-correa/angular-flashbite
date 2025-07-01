@@ -9,9 +9,9 @@ import { axiosService } from './axios-client';
 export class ZoneService {
   constructor() { }
 
-  async getZones(): Promise<Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }>> {
+  async getZones(page: number, quantity: number): Promise<Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }>> {
     
-    const response = await axiosService.get(config.urls.getZones, {
+    const response = await axiosService.get(`${config.urls.getZones}?page=${page}&quantity=${quantity}`, {
     });
 
     return response.data

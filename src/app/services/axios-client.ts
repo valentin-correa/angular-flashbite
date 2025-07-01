@@ -7,11 +7,14 @@ export const axiosService = axios.create({
 	},
 });
 
+
+
 // Interceptor para agregar el token a cada request
 axiosService.interceptors.request.use(
 	(config) => {
 		const token = localStorage.getItem('access_token');
 		if (token) {
+			
 			config.headers.Authorization = `Bearer ${token}`;
 			config.headers.Authorization = token;
 		}

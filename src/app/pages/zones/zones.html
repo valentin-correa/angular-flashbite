@@ -18,10 +18,13 @@
     <div class="input-wrapper w-100" style="max-width: 250px;">
       <img src="assets/quantity.png" alt="quantity icon" class="quantity-icon">
       <input
-        type="text"
+        type="number"
         class="rounded-pill btn-primary input-search w-100"
-        placeholder="How Many?"
-      >
+        [placeholder]="'How Many?'"
+        [(ngModel)]="quantity"
+        (keydown.enter)="aplicarCantidad()"
+        min="1"
+      />
     </div>
   </div>
 </div>
@@ -87,10 +90,14 @@
         <create-zone-modal (cerrar)="mostrarCreateZone = false" (crearZona)="agregarZona($event)" />
       }
     </div>
-    <div class="pagination position-relative justify-content-center" role="group">
-      <button type="button" class="btn circular-btn">&laquo;</button>
-      <p class="circular-btn current-page">2</p>
-      <button type="button" class="btn circular-btn">&raquo;</button>
+    <div class="pagination position-relative justify-content-center mt-3" role="group" aria-label="Pagination controls"> 
+      <button type="button" class="btn circular-btn" (click)="cambiarPagina('anterior')" [disabled]="page === 1">
+        &laquo;
+      </button>
+      <p class="circular-btn current-page">{{ page }}</p>
+      <button type="button" class="btn circular-btn" (click)="cambiarPagina('siguiente')" [disabled]="!hayMasZonas">
+        &raquo;
+      </button>
     </div>
   </div>
 } @else {
