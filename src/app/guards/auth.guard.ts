@@ -10,7 +10,7 @@ export const canActivateFn: CanActivateFn = () => {
 		return true;
 	}
 
-		// Redirige al login
-		router.navigate(['/login']);
-		return false;
+	// Redirige al login
+	router.navigate(['/login']);
+	return false;
 	};

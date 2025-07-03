@@ -27,6 +27,7 @@ export class Zones implements OnInit, OnDestroy {
   zonaNoEncontrada: boolean = false;
   idNoEncontrado: string = '';
   page: number = 1;
+  nextZone:any;
   quantity: number | null = null; // null para que se vea el placeholder inicialmente
   hayMasZonas: boolean = true; // para saber si mostrar botón de siguiente
 
@@ -72,22 +73,19 @@ export class Zones implements OnInit, OnDestroy {
       this.idNoEncontrado = zoneID;
 
       console.error('Error al obtener zona por ID:', error);
+      Swal.fire('Error', `There was a problem looking for zone by ID:\n${error}`, 'error');
     }
   } else {
     try {
       const cantidad = this.quantity ?? 10; //le doy valor por defecto 10 y me aseguro de que sea un número y no null
       this.zones = await this.zoneService.getZones(this.page, cantidad);
+      this.verificarSiguienteZona((this.page*cantidad)+1)
       
-      //Lo siguiente puede hacer que si en la siguiente página hay 0 elementos me habilite ir y no debería
-      if (this.zones.length<cantidad){
-        this.hayMasZonas=false
-      }else{
-        this.hayMasZonas=true
-      }
 
     } catch (error) {
       this.zones = [];
       console.error('Error al obtener zonas:', error);
+      Swal.fire('Error', `There was a problem loading the zones:\n${error}`, 'error');
     }
   }
 }
@@ -108,7 +106,15 @@ export class Zones implements OnInit, OnDestroy {
 
     if (response.success) {
       Swal.fire('Deleted!', 'Zone has been deleted.', 'success');
-      this.zones = this.zones.filter(z => z.id !== zona.id);
+      this.zones = this.zones.filter(z => z.id !== zona.id); //filtra la zona eliminada
+      if(this.hayMasZonas){
+        this.zones = [...this.zones, ...this.nextZone]; //agrego la zona siguiente para q se vea en pantalla
+      
+        //busco en el mismo indice donde antes estaba la nextZone si ahora hay otra o ya no hay pag siguiente
+        const cantidad = this.quantity ?? 10; //le doy valor por defecto 10 y me aseguro de que sea un número y no null
+        this.verificarSiguienteZona((this.page*cantidad)+1)
+      }
+      
     } else {
       Swal.fire('Error', `There was a problem deleting the zone:\n${response.error}`, 'error');
     }
@@ -124,7 +130,12 @@ export class Zones implements OnInit, OnDestroy {
     this.globalStatusService.setLoading(false);
   });
 }
-  
+  async verificarSiguienteZona(nextZoneIndex:number){
+    //Traigo el primer elemento de la siguiente página, y según si existe asigno valor a HayMasZonas
+    this.nextZone=await this.zoneService.getZones(nextZoneIndex, 1);
+    this.hayMasZonas=(this.nextZone.length>0)
+  }  
+
   agregarZona(zone: any): void { 
     if (this.zones.length < (this.quantity ?? 10)) {
     const zoneWithoutDeliveries = {...zone, deliveries: []};

@@ -38,7 +38,7 @@
               <label for="password" class="form-label">Password</label>
               <input formControlName="password" type="password" class="form-control" id="password" required>
               @if (formulario.get('password')?.invalid && formulario.get('password')?.touched) {
-                <p class="text-danger">No password entered</p>
+                <p class="text-danger">Password must be at least 8 characters long</p>
               }
             </div>
             <div class="mb-3">

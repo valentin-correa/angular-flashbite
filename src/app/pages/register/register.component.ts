@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { axiosService } from '../../services/axios-client';
 
@@ -19,9 +19,9 @@ export class RegisterComponent {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      passwordValidation: ['', [Validators.required]]
-    });
+      password: ['', [Validators.required,Validators.minLength(8)]],
+      passwordValidation: ['', [Validators.required,Validators.minLength(8)]]
+    }, { validators: this.passwordsMatchValidator });
   }
   
   async register() {
@@ -32,10 +32,6 @@ export class RegisterComponent {
     }
 
     const { firstName, lastName, email, password, passwordValidation } = this.formulario.value
-
-    if (password !== passwordValidation) {
-      return;
-    }
 
     try {
       const response = await axiosService.post('http://localhost:3001/register', {
@@ -54,5 +50,14 @@ export class RegisterComponent {
     catch (err: any) {
       this.error = err.response?.data?.message || 'Error al registrar usuario.';
     }
+  }
+
+  passwordsMatchValidator(form: AbstractControl) { //validador personalizado
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('passwordValidation')?.value;
+    if (password !== confirmPassword) {
+      return { passwordMismatch: true };  // devuelve error
+    }
+    return null; // no devuelve error, formulario válido
   }
 }
