@@ -72,8 +72,7 @@ export class Zones implements OnInit, OnDestroy {
       this.zonaNoEncontrada = true;
       this.idNoEncontrado = zoneID;
 
-      console.error('Error al obtener zona por ID:', error);
-      Swal.fire('Error', `There was a problem looking for zone by ID:\n${error}`, 'error');
+      
     }
   } else {
     try {
@@ -113,6 +112,8 @@ export class Zones implements OnInit, OnDestroy {
         //busco en el mismo indice donde antes estaba la nextZone si ahora hay otra o ya no hay pag siguiente
         const cantidad = this.quantity ?? 10; //le doy valor por defecto 10 y me aseguro de que sea un número y no null
         this.verificarSiguienteZona((this.page*cantidad)+1)
+      }else if(this.zones.length==0 && this.page>1){ //si la página quedo vacía y no es la primera
+        this.cambiarPagina("anterior");
       }
       
     } else {

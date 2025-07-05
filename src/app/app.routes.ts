@@ -10,8 +10,8 @@ import { canActivateFn } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    component: TemplateComponent,
     canActivate: [canActivateFn],
+    component: TemplateComponent,
     children: [
       {
         path: '',
