@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { axiosService } from '../../services/axios-client';
 import { inject } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { inject } from '@angular/core';
 export class LoginComponent {
   formulario: FormGroup;
   error = '';
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private authService: AuthService) {
 	  this.formulario = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
 	  password: ['', [Validators.required]]
@@ -29,22 +30,13 @@ export class LoginComponent {
     }
 
     const { email, password } = this.formulario.value
-
-    try {
-      const response = await axiosService.post('http://localhost:3001/login', {
-        email,
-        password
-      });
-      
-      this.error = ''
-
-      localStorage.setItem('access_token', response.data.accessToken)
-      this.router.navigate(['zones'])
-
-    }
-
-    catch (err: any) { 
-      this.error = err.response?.data?.message || 'Error al iniciar sesión';
-    }
+      const response= await this.authService.login(email,password) 
+      if (response.success){
+        this.error = ''
+        localStorage.setItem('access_token', response.data.accessToken)
+        this.router.navigate(['zones'])
+      }else{
+        this.error = response.error;
+      }
   }
 }
