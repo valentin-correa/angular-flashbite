@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './zones.css'
 })
 export class Zones implements OnInit, OnDestroy {
-  zones: Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[]}> = [];
+  zones: Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number}> = [];
   
   //variables para controlar la aparición de modals
   mostrarCreateZone=false;
@@ -138,8 +138,7 @@ export class Zones implements OnInit, OnDestroy {
 
   agregarZona(zone: any): void { 
     if (this.zones.length < (this.quantity ?? 10)) {
-    const zoneWithoutDeliveries = {...zone, deliveries: []};
-    this.zones = [...this.zones, zoneWithoutDeliveries];
+    this.zones = [...this.zones, zone];
     }else{
       // Si agregamos una zona pero ya alcanzamos el límite visual, asumimos que hay más zonas
       this.hayMasZonas=true;
