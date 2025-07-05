@@ -25,7 +25,21 @@ export class AuthService{
             return { success: false, error: message };
         }
     } 
-    async register(email:string,password:string){
+    async register(email:string,password:string):Promise<{ success: boolean; error: string}>{
+        try {
+            const response = await axiosService.post(`${config.urls.auth}/register`, {
+                email,
+                password
+            });
+            return { success: true, error:''}
+            }
 
+        catch (error: any) { 
+            const message =
+                error.response?.data?.message ||  // si existe un mensaje de error que manda el backend lo uso
+                error.message ||                  // mensaje generado por Axios
+                "Unknown Error";                  // por si no se obtiene
+            return { success: false, error: message };
+        }
     }
 }

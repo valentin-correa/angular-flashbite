@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { axiosService } from '../../services/axios-client';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent {
   error = '';
   submitted = false;
   successMessage = '';
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private authService: AuthService) {
     this.formulario = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -33,22 +34,15 @@ export class RegisterComponent {
 
     const { firstName, lastName, email, password, passwordValidation } = this.formulario.value
 
-    try {
-      const response = await axiosService.post('http://localhost:3001/register', {
-        email,
-        password
-      });
-
+    const response = await this.authService.register(email,password);
+    if (response.success){
       this.error = '';
       this.successMessage = "User successfully registered"
       setTimeout(() => {
         this.router.navigate(['login'])
       }, 2000)
-      
-    }
-
-    catch (err: any) {
-      this.error = err.response?.data?.message || 'Error al registrar usuario.';
+    }else{
+      this.error = response.error;
     }
   }
 
