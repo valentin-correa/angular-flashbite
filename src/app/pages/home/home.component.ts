@@ -9,7 +9,7 @@ import { GlobalStatusService } from '../../services/global-status.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  items: Array<{ image: string; name: string; description: string }> = [];
+  items: Array<{ image: string; name: string;}> = [];
   constructor(
     private readonly apiService: ApiService,
     private readonly globalStatusService: GlobalStatusService
@@ -20,8 +20,10 @@ export class HomeComponent implements OnInit {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
-    const data = await this.apiService.getData();
-    this.items = data;
+    for (var i = 0;i < 6 ; i++) {
+      const data = await this.apiService.getData();
+      this.items.push(data);
+    }
     this.globalStatusService.setLoading(false);
   }
 }
