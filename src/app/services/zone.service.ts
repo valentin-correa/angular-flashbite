@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { config } from '../config/env';
 import { axiosService } from './axios-client';
+import { Zone } from '../interfaces/zone.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { axiosService } from './axios-client';
 export class ZoneService {
   constructor() { }
 
-  async getZones(page: number, quantity: number): Promise<Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }>> {
+  async getZones(page: number, quantity: number): Promise<Array<Zone>> {
     
     const response = await axiosService.get(`${config.urls.getZones}?page=${page}&quantity=${quantity}`, {
     });
@@ -17,7 +18,7 @@ export class ZoneService {
     return response.data
   }
 
-  async getZoneByID(zoneID: string): Promise<{ id: number, name: string, location: {lat: string, lng: string}, radius: number, deliveries: number[] }> {
+  async getZoneByID(zoneID: string): Promise<Zone> {
     const response = await axiosService.get(config.urls.getZones + `/${zoneID}`);
 
     return response.data

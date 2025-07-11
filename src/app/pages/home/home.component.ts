@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { GlobalStatusService } from '../../services/global-status.service';
+import { Meal } from '../../interfaces/meal.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { GlobalStatusService } from '../../services/global-status.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  items: Array<{ image: string; name: string;}> = [];
+  items: Array<Meal> = [];
   constructor(
     private readonly apiService: ApiService,
     private readonly globalStatusService: GlobalStatusService
