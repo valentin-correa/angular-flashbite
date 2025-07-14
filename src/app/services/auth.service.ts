@@ -25,13 +25,13 @@ export class AuthService{
             return { success: false, error: message };
         }
     } 
-    async register(email:string,password:string):Promise<{ success: boolean; error: string}>{
+    async register(email:string,password:string):Promise<{success:true}|{ success: false; error: string}>{
         try {
             const response = await axiosService.post(`${config.urls.auth}/register`, {
                 email,
                 password
             });
-            return { success: true, error:''}
+            return { success: true}
             }
 
         catch (error: any) { 
