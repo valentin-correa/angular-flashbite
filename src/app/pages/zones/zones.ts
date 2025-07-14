@@ -8,6 +8,7 @@ import { UpdateZone } from "../../components/update-zone/update-zone";
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ZoneWithoutID } from '../../interfaces/zone.interface';
 
 @Component({
   selector: 'app-zones',
@@ -16,7 +17,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './zones.css'
 })
 export class Zones implements OnInit, OnDestroy {
-  zones: Array<{ id: number, name: string, location: {lat: string, lng: string}, radius: number}> = [];
+  zones: Array<ZoneWithoutID> = [];
   
   //variables para controlar la aparición de modals
   mostrarCreateZone=false;
