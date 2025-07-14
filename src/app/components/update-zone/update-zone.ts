@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import Swal from 'sweetalert2';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
+import { Zone, ZoneWithoutID } from '../../interfaces/zone.interface';
 @Component({
   selector: 'update-zone-modal',
   imports: [CommonModule,ReactiveFormsModule],
@@ -12,8 +13,8 @@ import { GlobalStatusService } from '../../services/global-status.service';
 })
 export class UpdateZone {
   @Output() cerrar = new EventEmitter<void>();
-  @Input() zona!: any;
-  @Output() zonaActualizada = new EventEmitter<any>();
+  @Input() zona!: Zone;
+  @Output() zonaActualizada = new EventEmitter<Zone>();
 
   onCerrar() {
     this.cerrar.emit(); // Notifica al padre que se debe cerrar
@@ -62,7 +63,7 @@ export class UpdateZone {
     }
   });
 }
-async updateZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+async updateZone(data:ZoneWithoutID){
   this.globalStatusService.setLoading(true);
   const response=await this.zoneService.updateZone(data,this.zona.id);
   this.globalStatusService.setLoading(false);

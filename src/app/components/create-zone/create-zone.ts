@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ZoneService } from '../../services/zone.service';
 import { GlobalStatusService } from '../../services/global-status.service';
+import { Zone, ZoneWithoutID } from '../../interfaces/zone.interface';
 
 @Component({
   selector: 'create-zone-modal',
@@ -15,7 +16,7 @@ import { GlobalStatusService } from '../../services/global-status.service';
 export class CreateZone {
 
   @Output() cerrar = new EventEmitter<void>();
-  @Output() crearZona = new EventEmitter<any>();
+  @Output() crearZona = new EventEmitter<Zone>();
 
   onCerrar() {
     this.cerrar.emit(); // Notifica al padre que se debe cerrar
@@ -65,7 +66,7 @@ export class CreateZone {
     }
   });
 }
-async createNewZone(data:{name:string,location:{lat:number,lng:number},radius:number}){
+async createNewZone(data:ZoneWithoutID){
   this.globalStatusService.setLoading(true);
   const response=await this.zoneService.createZone(data);
   this.globalStatusService.setLoading(false);

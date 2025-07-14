@@ -8,7 +8,7 @@ import { UpdateZone } from "../../components/update-zone/update-zone";
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ZoneWithoutID } from '../../interfaces/zone.interface';
+import { Zone, ZoneWithoutID } from '../../interfaces/zone.interface';
 
 @Component({
   selector: 'app-zones',
@@ -17,18 +17,18 @@ import { ZoneWithoutID } from '../../interfaces/zone.interface';
   styleUrl: './zones.css'
 })
 export class Zones implements OnInit, OnDestroy {
-  zones: Array<ZoneWithoutID> = [];
+  zones: Array<Zone> = [];
   
   //variables para controlar la aparición de modals
   mostrarCreateZone=false;
   mostrarUpdateZone = false;
-  zonaSeleccionada: any;
+  zonaSeleccionada!: Zone;
   zonaBuscadaInput: string = ''
   private routeSub!: Subscription
   zonaNoEncontrada: boolean = false;
   idNoEncontrado: string = '';
   page: number = 1;
-  nextZone:any;
+  nextZone:Array<Zone>=[];
   quantity: number | null = null; // null para que se vea el placeholder inicialmente
   hayMasZonas: boolean = true; // para saber si mostrar botón de siguiente
 
@@ -90,7 +90,7 @@ export class Zones implements OnInit, OnDestroy {
   }
 }
 
-  async confirmarEliminarZona(zona: any) {
+  async confirmarEliminarZona(zona: Zone) {
   const result = await Swal.fire({
     title: 'Are you sure?',
     text: `Do you want to delete zone "${zona.name}" (ID: ${zona.id})?`,
@@ -138,7 +138,7 @@ export class Zones implements OnInit, OnDestroy {
     this.hayMasZonas=(this.nextZone.length>0)
   }  
 
-  agregarZona(zone: any): void { 
+  agregarZona(zone: Zone): void { 
     if (this.zones.length < (this.quantity ?? 10)) {
     this.zones = [...this.zones, zone];
     }else{
@@ -147,12 +147,12 @@ export class Zones implements OnInit, OnDestroy {
     }
     
   }
-  abrirUpdateZone(zone: any) {
+  abrirUpdateZone(zone: Zone) {
   this.zonaSeleccionada = zone;
   this.mostrarUpdateZone = true;
 }
 
-  actualizarZonaActualizada(nuevaZona: any) {
+  actualizarZona(nuevaZona: Zone) {
     // Buscamos la zona vieja por el id y la reemplazamos por la nueva
     const index = this.zones.findIndex(z => z.id === nuevaZona.id);
     if (index !== -1) {

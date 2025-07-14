@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { config } from '../config/env';
 import { axiosService } from './axios-client';
-import { Zone } from '../interfaces/zone.interface';
+import { Zone, ZoneWithoutID } from '../interfaces/zone.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class ZoneService {
     return response.data
   }
 
-  async createZone(zone:Zone):Promise<{
+  async createZone(zone:ZoneWithoutID):Promise<{
     success: true; data: any} | {success: false; error: string}
   >{
     try {
@@ -48,7 +48,7 @@ export class ZoneService {
     return { success: false, error: message };
   }
   }
-  async updateZone(zone:Zone, id:number):Promise<{
+  async updateZone(zone:ZoneWithoutID, id:number):Promise<{
     success: true; data: any} | {success: false; error: string}
   >{
     try {
