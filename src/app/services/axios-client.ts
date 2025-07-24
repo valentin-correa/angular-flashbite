@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 export const axiosService = axios.create({
-	//baseURL: 'https://api.ejemplo.com', // Cambiar por tu baseURL real
 	headers: {
         'Content-Type': 'application/json',
 	},
-});
+}); //crea una instancia de Axios con una configuración po defecto (todas las peticiones estarán en formato JSON)
 
 
 

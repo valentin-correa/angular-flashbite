@@ -18,7 +18,7 @@ export const canActivateFn: CanActivateFn = () => {
 		}
 		} catch (error) {
 			console.error("Token inválido", error);
-			localStorage.removeItem('access_token'); // Limpio token dañado
+			localStorage.removeItem('access_token'); // Limpio token vencido o dañado
 		}
 	}
 	//si no hay token o está vencido, redirijo al login
