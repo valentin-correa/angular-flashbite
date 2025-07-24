@@ -44,7 +44,7 @@
             <div class="mb-3">
               <label for="password-confirm" class="form-label">Confirm password</label>
               <input formControlName="passwordValidation" type="password" class="form-control" id="password-confirm" required>
-              @if (formulario.get('passwordValidation')?.invalid && formulario.get('passwordValidation')?.touched) {
+              @if (formulario.hasError('passwordMismatch') && formulario.get('passwordValidation')?.touched) {
                 <p class="text-danger">Passwords don't match</p>
               }
             </div>
