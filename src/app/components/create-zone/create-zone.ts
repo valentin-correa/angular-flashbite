@@ -48,7 +48,7 @@ export class CreateZone {
       if (swalResult.isConfirmed) {
         const form = this.formulario.value;
       const data = {
-        //las siguientes validaciones sirven para ocntrarrestrar manipulaciones del html en el navegador
+        //las siguientes validaciones sirven para contrarrestrar manipulaciones del html en el navegador
         name: (form.nombre ?? '').trim(),  // asegura que no sea null y remueve espacios
         location: {
           lat: Number(form.latitud),
